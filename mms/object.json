@@ -1,6 +1,6 @@
 {
-  "objectID": "index.js",
-  "objectType": "model",
+  "objectID": "label_map.pbtxt",
+  "objectType": "label",
   "destinationOrgID": "$HZN_ORG_ID",
   "destinationPolicy": {
     "properties": [],
@@ -18,6 +18,6 @@
   }, 
   "expiration": "",
   "version": "1.0.0",
-  "description": "image demo with tensorflow models",
+  "description": "image object detector demo with tensorflow models",
   "activationTime": ""
 }

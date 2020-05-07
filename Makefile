@@ -17,8 +17,8 @@ SERVICE_NAME ?=max-object-detector-mms
 SERVICE_VERSION ?=1.0.0
 PORT_NUM ?=5000
 DOCKER_NAME ?=max-object-detector
-OBJECT_TYPE ?=model
-OBJECT_ID ?=index.js
+OBJECT_TYPE ?=label
+OBJECT_ID ?=label_map.pbtxt
 BUSINESS_POLICY_NAME ?=$(SERVICE_NAME).bp 
 
 
@@ -73,7 +73,7 @@ build-all-arches:
 
   # target to publish new ML model file to mms
 publish-mms-object:
-	hzn mms object publish -m mms/object.json -f mms/index.js
+	hzn mms object publish -m mms/object.json -f mms/label_map.pbtxt
 
   # target to list mms object
 list-mms-object:

@@ -94,25 +94,25 @@ A more elaborate tutorial on how to deploy this MAX model to production on [IBM 
 Clone this repository locally. In a terminal, run the following command:
 
 ```bash
-$ git clone https://github.com/IBM/MAX-Object-Detector.git
+git clone https://github.com/IBM/MAX-Object-Detector.git
 ```
 
 Change directory into the repository base folder:
 
 ```bash
-$ cd MAX-Object-Detector
+cd MAX-Object-Detector
 ```
 
 To build the docker image locally for Intel CPUs, run:
 
 ```bash
-$ docker build -t max-object-detector .
+docker build -t max-object-detector .
 ```
 
 For ARM CPUs (eg Raspberry Pi), run:
 
 ```bash
-$ docker build -f Dockerfile.arm32v7 -t max-object-detector .
+docker build -f Dockerfile.arm32v7 -t max-object-detector .
 ```
 
 All required model assets will be downloaded during the build process. _Note_ that currently this docker image is CPU only (we will add support for GPU images later).
@@ -123,7 +123,7 @@ All required model assets will be downloaded during the build process. _Note_ th
 To run the docker image, which automatically starts the model serving API, run:
 
 ```bash
-$ docker run -it -p 5000:5000 max-object-detector
+docker run -it -p 5000:5000 max-object-detector
 ```
 
 ### 3. Use the Model
@@ -137,7 +137,7 @@ Use the `model/predict` endpoint to load a test image (you can use one of the te
 You can also test it on the command line, for example:
 
 ```bash
-$ curl -F "image=@samples/dog-human.jpg" -XPOST http://127.0.0.1:5000/model/predict
+curl -F "image=@samples/dog-human.jpg" -XPOST http://127.0.0.1:5000/model/predict
 ```
 
 You should see a JSON response like that below:
@@ -175,7 +175,7 @@ You should see a JSON response like that below:
 You can also control the probability threshold for what objects are returned using the `threshold` argument like below:
 
 ```bash
-$ curl -F "image=@samples/dog-human.jpg" -XPOST http://127.0.0.1:5000/model/predict?threshold=0.5
+curl -F "image=@samples/dog-human.jpg" -XPOST http://127.0.0.1:5000/model/predict?threshold=0.5
 ```
 
 The optional `threshold` parameter is the minimum `probability` value for predicted labels returned by the model.
@@ -188,7 +188,7 @@ The default value for `threshold` is `0.7`.
 Run the following command from the model repo base folder, in a new terminal window:
 
 ```bash
-$ jupyter notebook
+jupyter notebook
 ```
 
 This will start the notebook server. You can launch the demo notebook by clicking on `demo.ipynb`.
@@ -214,7 +214,7 @@ and provides interactive visualization of the bounding boxes and their related l
 If you wish to disable the web app, start the model serving API by running:
 
 ```bash
-$ docker run -it -p 5000:5000 -e DISABLE_WEB_APP=true codait/max-object-detector
+docker run -it -p 5000:5000 -e DISABLE_WEB_APP=true codait/max-object-detector
 ```
 
 ## Train this Model on Watson Machine Learning

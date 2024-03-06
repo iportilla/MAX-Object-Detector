@@ -7,7 +7,7 @@
 SYSTEM_ARCH := $(shell uname -m | sed -e 's/aarch64.*/arm64/' -e 's/x86_64.*/amd64/' -e 's/armv.*/arm/')
 
 # To build for an arch different from the current system, set this env var to one of the values in the comment above
-#export ARCH ?= $(SYSTEM_ARCH)
+export ARCH ?=amd64 # $(SYSTEM_ARCH)
 
 # Default ARCH to the architecture of this machines (as horizon/golang describes it)
 export ARCH ?= $(shell hzn architecture)
@@ -32,11 +32,11 @@ default: all
 all: build run
 
 build:
-	docker build -t $(DOCKER_IMAGE_BASE)_$(ARCH):$(SERVICE_VERSION) -f ./Dockerfile.$(ARCH) .
+	docker build -t $(DOCKER_IMAGE_BASE)_$(ARCH) -f ./Dockerfile.$(ARCH) .
 
 run:
 	@echo "Open your browser and go to http://localhost:5000"
-	docker run -d -p=$(PORT_NUM):5000 --name=$(DOCKER_NAME) $(DOCKER_IMAGE_BASE)_$(ARCH):$(SERVICE_VERSION)
+	docker run -d -p=$(PORT_NUM):5000 --name=$(DOCKER_NAME) $(DOCKER_IMAGE_BASE)_$(ARCH)
 
   # Run and verify the service
 test: build

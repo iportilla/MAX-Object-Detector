@@ -1,5 +1,5 @@
 #
-# Copyright 2018-2020 IBM Corp. All Rights Reserved.
+# Copyright 2018-2019 IBM Corp. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,7 @@
 # limitations under the License.
 #
 
-#FROM codait/max-base:arm-arm32v7-v1.3.2
-FROM codait/max-base:v1.3.2 
-#FROM codait/max-base:powerai-x86_64-v1.3.2
+FROM codait/max-base:v1.3.2
 
 RUN apt-get update && apt-get -y install libatlas3-base && rm -rf /var/lib/apt/lists/*
 
@@ -37,8 +35,7 @@ RUN wget -O - -nv --show-progress --progress=bar:force:noscroll https://github.c
   tar zxvf - --strip-components=1 --wildcards 'MAX-Object-Detector-Web-App-*/static'
 
 COPY requirements.txt /workspace
-#RUN python -m pip install https://www.piwheels.org/simple/tensorflow/tensorflow-1.13.1-cp37-none-linux_armv7l.whl
-RUN python -m pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . /workspace
 
@@ -51,9 +48,6 @@ RUN if [ "$use_pre_trained_model" = "true" ] ; then \
         rm -rf ./assets && ln -s ./custom_assets ./assets ; \
       fi \
     fi
-
-#edge
-#COPY frozen_inference_graph.pb /workspace/assets/frozen_inference_graph.pb
 
 EXPOSE 5000
 
